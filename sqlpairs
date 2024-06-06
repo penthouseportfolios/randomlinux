@@ -1,0 +1,15 @@
+import pyodbc
+import pandas as pd
+import socket
+import time
+
+server = 'mrts.database.windows.net'
+database = 'mrts_data'
+username = 'mrtsadmin'
+password = '2644J0sh!'
+driver= '{ODBC Driver 17 for SQL Server}'
+
+conn = pyodbc.connect('DRIVER='+driver+';SERVER=tcp:'+server+';PORT=1433;DATABASE='+database+';UID='+username+';PWD='+ password)
+mycursor = conn.cursor()
+df = pd.read_sql("""SELECT * FROM mrts_data.dbo.mrts_pairs WHERE sector = 'Basic Materials'""",conn)
+
